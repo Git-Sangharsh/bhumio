@@ -1,7 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
-
-.rate-container{
+.rate-container {
   /* display: flex;
   flex-direction: row-reverse;
   align-items: center;
@@ -14,24 +13,31 @@
   background-image: url(https://i.ibb.co/vJt5HSh/noisy-texture-300x300-o10-d10-c-a82851-t1.png);
 }
 
-.rate-box{
+.app{
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.rate-box {
   padding: 5px;
   box-sizing: border-box;
   width: 30vw;
   display: flex;
   justify-content: center;
   flex-direction: column;
-  background-color: #F7F8F9;
+  background-color: #f7f8f9;
   box-shadow: -4px -4px 6px rgba(0, 0, 0, 0.21);
   /* background-image: url(https://i.ibb.co/vJt5HSh/noisy-texture-300x300-o10-d10-c-a82851-t1.png); */
 }
 
-.tick-container{
+.tick-container,
+.replace-chart {
   width: 70vw !important;
   height: 100vh;
 }
 
-.rate-title{
+.rate-title {
   text-align: center;
   font-family: "Poppins", sans-serif;
   font-weight: 600;
@@ -39,31 +45,30 @@
   border-radius: 30px;
 }
 
-.div-rate-input{
+.div-rate-input {
   /* background-color: aliceblue; */
   display: flex;
   flex-direction: column;
   gap: 2px;
-  padding:  2px 25px;
-
+  padding: 2px 25px;
 }
 
-
-.div-rate-input > input:hover{
-  background-color: #5BA4E4;
+.div-rate-input > input:hover {
+  background-color: #5ba4e4;
   outline: none;
   color: white;
   transition: 0.7s ease;
 }
 
-.div-rate-input > input:focus{
-  background-color: #5BA4E4;
+.div-rate-input > input:focus {
+  background-color: #5ba4e4;
   outline: none;
   color: white;
   transition: 0.7s ease;
 }
 
-.div-rate-input > input, select{
+.div-rate-input > input,
+select {
   width: 100%;
   padding: 8px;
   box-sizing: border-box;
@@ -75,14 +80,14 @@
   cursor: pointer;
 }
 
-option{
+option {
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
   font-weight: 400;
   background-color: rgb(236, 236, 236);
 }
 
-.div-rate-input > label{
+.div-rate-input > label {
   width: 100%;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
@@ -90,7 +95,7 @@ option{
   font-size: 12px;
 }
 
-.rate-btn{
+.rate-btn {
   margin: 4px 0px;
   box-sizing: border-box;
   padding: 8px;
@@ -103,43 +108,41 @@ option{
   width: 100%;
   cursor: pointer;
   font-weight: 600;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-
-.loan-term-div{
+.loan-term-div {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
 }
 
-.loan-term-btn{
+.loan-term-btn {
   width: 100%;
   margin: 10px 0px;
   margin-top: 4px;
   border: none;
   padding: 8px;
   font-weight: 600;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   cursor: pointer;
 }
 
-.active{
-  background-color: #5BA4E4;
+.active {
+  background-color: #5ba4e4;
   color: white;
   font-weight: 600;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.21);
   transition: 1s ease;
 }
 
-.active-disabled{
+.active-disabled {
   background-color: rgb(236, 236, 236);
 }
 
-
-.dice-range{
+.dice-range {
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
@@ -150,12 +153,72 @@ option{
   border-radius: 100px;
   padding: 10px;
   cursor: grab;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.dice-range:focus{
+.dice-range:focus {
   cursor: grabbing;
 }
 
+@media (max-width: 1024px) {
+  .rate-title {
+    font-size: 20px;
+    margin: 5px 0px;
+  }
+
+  .div-rate-input {
+    gap: 2px;
+    padding: 2px 5px;
+  }
+
+  .div-rate-input > input,
+  select {
+    padding: 6px;
+  }
+
+  .div-rate-input > label {
+    font-size: 10px;
+  }
+
+  .loan-term-btn {
+    margin: 5px 0px;
+    margin-top: 2px;
+  }
+
+}
 
 
+/* rate-container >
+  replace-chart || tick-container > bar-chart,
+  rate-box > div-rate-input > label, input, select, option
+*/
 
+@media (max-width: 768px){
+  .rate-container{
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100%;
+  }
+
+  .replace-chart{
+    background-color: black;
+    width: 100vw !important;
+  }
+
+  .bar-chart{
+    width: 100%;
+  }
+
+  .tick-container{
+    width: 100vw !important;
+    height: 100vh;
+  }
+
+  .rate-box{
+    width: 100%;
+    height: 100vh ;
+  }
+}

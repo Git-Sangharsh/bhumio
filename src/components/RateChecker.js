@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./RateChecker.css";
 import TickPlacementBars from "./TickPlacementBars.js";
+import { motion } from "framer-motion";
+import { Link } from "react-scroll";
 
 const RateChecker = () => {
   const [formData, setFormData] = useState({
@@ -104,12 +106,25 @@ const RateChecker = () => {
 
   return (
     <div className="rate-container">
-      {sortedRateData && (
-        <div>
-          <TickPlacementBars data={sortedRateData} />
-        </div>
+      {sortedRateData ? (
+        <TickPlacementBars data={sortedRateData} />
+      ) : (
+        <div
+          className="replace-chart"
+          style={{
+            minWidth: "300px",
+            minHeight: "200px",
+            border: "1px solid #ccc",
+          }}
+        ></div>
       )}
-      <form className="rate-box" onSubmit={handleSubmit}>
+      <motion.form
+        initial={{ x: "100%", filter: "blur(5px)", opacity: 0 }}
+        animate={{ x: "0%", filter: "blur(0px)", opacity: 1 }}
+        transition={{ duration: 1, ease: "easeIn", type: "spring" }}
+        className="rate-box"
+        onSubmit={handleSubmit}
+      >
         <div className="div-rate-input">
           <h1 className="rate-title">EXPLORE RATE OPTIONS</h1>
           <label>
@@ -259,11 +274,13 @@ const RateChecker = () => {
             <option value="7-1">7/1 ARM</option>
             <option value="10-1">10/1 ARM</option>
           </select>
-          <button className="rate-btn" type="submit">
-            Check Rates
-          </button>
+          <Link to="tick-container" smooth={true} duration={1000}>
+            <button className="rate-btn" type="submit">
+              Check Rates
+            </button>
+          </Link>
         </div>
-      </form>
+      </motion.form>
 
       {error && <div style={{ color: "red" }}>{error}</div>}
     </div>

@@ -2,6 +2,7 @@ import * as React from 'react';
 import { BarChart } from '@mui/x-charts/BarChart';
 import { axisClasses } from '@mui/x-charts/ChartsAxis';
 import "./RateChecker.css";
+import { Element } from 'react-scroll';
 
 export default function TickPlacementBars({ data }) {
   // Transforming rateData into a dataset suitable for BarChart
@@ -27,15 +28,19 @@ export default function TickPlacementBars({ data }) {
   };
 
   return (
-    <div className='tick-container'>
-      <BarChart
-        className='bar-chart'
-        dataset={dataset}
-        xAxis={[
-          { scaleType: 'band', dataKey: 'rate' },
-        ]}
-        {...chartSetting}
-      />
+    <div>
+      <Element name="tick-container">
+        <div className='tick-container'>
+          <BarChart
+            className='bar-chart'
+            dataset={dataset}
+            xAxis={[
+              { scaleType: 'band', dataKey: 'rate' },
+            ]}
+            {...chartSetting}
+          />
+        </div>
+      </Element>
     </div>
   );
 }
