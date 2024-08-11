@@ -1,5 +1,5 @@
 import React from "react";
-import RateChecker from "./components/RateChecker";
+import RateChecker from "./components/RateChecker.js";
 import "./App.css";
 const App = () => {
   return (

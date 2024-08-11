@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./RateChecker.css";
-import TickPlacementBars from "./TickPlacementBars";
+import TickPlacementBars from "./TickPlacementBars.js";
 
 const RateChecker = () => {
   const [formData, setFormData] = useState({
@@ -111,9 +111,10 @@ const RateChecker = () => {
       )}
       <form className="rate-box" onSubmit={handleSubmit}>
         <div className="div-rate-input">
-          <label>Credit Score Range:
-          Selected Range: {formData.minfico} - {formData.maxfico}
-
+          <h1 className="rate-title">EXPLORE RATE OPTIONS</h1>
+          <label>
+            Credit Score Range: Selected Range: {formData.minfico} -{" "}
+            {formData.maxfico}
           </label>
           <input
             type="range"
@@ -154,12 +155,14 @@ const RateChecker = () => {
         </div>
         <div className="div-rate-input">
           <label>State:</label>
-          <input
-            type="text"
-            name="state"
-            value={formData.state}
-            onChange={handleChange}
-          />
+          <select name="state" value={formData.state} onChange={handleChange}>
+            <option value="AL">Albama</option>
+            <option value="AK">Alaska</option>
+            <option value="AZ">Arizona</option>
+            <option value="CA">California</option>
+            <option value="FL">Florida</option>
+            <option value="TX">Texas</option>
+          </select>
         </div>
         <div className="div-rate-input">
           <label>Rate Type</label>
@@ -192,7 +195,9 @@ const RateChecker = () => {
           <label>Loan Term (years):</label>
           <div className="loan-term-div">
             <button
-              className={`loan-term-btn ${loanTerm === 30 ? "active" : "active-disabled"}`}
+              className={`loan-term-btn ${
+                loanTerm === 30 ? "active" : "active-disabled"
+              }`}
               onClick={(e) => {
                 e.preventDefault();
                 handleTermChange(30);
@@ -201,7 +206,9 @@ const RateChecker = () => {
               30 Years
             </button>
             <button
-              className={`loan-term-btn ${loanTerm === 15 ? "active" : "active-disabled"}`}
+              className={`loan-term-btn ${
+                loanTerm === 15 ? "active" : "active-disabled"
+              }`}
               onClick={(e) => {
                 e.preventDefault();
                 handleTermChange(15);
