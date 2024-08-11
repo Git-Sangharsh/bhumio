@@ -3,7 +3,6 @@ import axios from "axios";
 import "./RateChecker.css";
 import TickPlacementBars from "./TickPlacementBars.js";
 import { motion } from "framer-motion";
-import { Link } from "react-scroll";
 
 const RateChecker = () => {
   const [formData, setFormData] = useState({
@@ -63,24 +62,6 @@ const RateChecker = () => {
     }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.get(
-        "http://localhost:5000/api/rate-checker",
-        {
-          params: formData,
-        }
-      );
-      setRateData(response.data.data);
-      setError(null);
-    } catch (err) {
-      setError("Failed to fetch data");
-      setRateData(null);
-      alert(`Server error: ${err.message}`);
-    }
-  };
-
   useEffect(() => {
     const calculateDP = percentage / 100;
     const result = calculateDP * formData.price;
@@ -94,7 +75,27 @@ const RateChecker = () => {
     }));
   }, [formData.price, percentage]);
 
-  // Sorting rateData from lowest to highest rate
+  useEffect(() => {
+    const fetchRates = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:5000/api/rate-checker",
+          {
+            params: formData,
+          }
+        );
+        setRateData(response.data.data);
+        setError(null);
+      } catch (err) {
+        setError("Failed to fetch data");
+        setRateData(null);
+        alert(`Server error: ${err.message}`);
+      }
+    };
+
+    fetchRates();
+  }, [formData]);
+
   const sortedRateData = rateData
     ? Object.keys(rateData)
         .sort((a, b) => parseFloat(a) - parseFloat(b))
@@ -109,21 +110,13 @@ const RateChecker = () => {
       {sortedRateData ? (
         <TickPlacementBars data={sortedRateData} />
       ) : (
-        <div
-          className="replace-chart"
-          style={{
-            minWidth: "300px",
-            minHeight: "200px",
-            border: "1px solid #ccc",
-          }}
-        ></div>
+        <div className="replace-chart"></div>
       )}
       <motion.form
         initial={{ x: "100%", filter: "blur(5px)", opacity: 0 }}
         animate={{ x: "0%", filter: "blur(0px)", opacity: 1 }}
         transition={{ duration: 1, ease: "easeIn", type: "spring" }}
         className="rate-box"
-        onSubmit={handleSubmit}
       >
         <div className="div-rate-input">
           <h1 className="rate-title">EXPLORE RATE OPTIONS</h1>
@@ -241,7 +234,10 @@ const RateChecker = () => {
               className={`loan-term-btn ${
                 formData.loan_type === "conf" ? "active" : "active-disabled"
               }`}
-              onClick={() => handleLoanTypeChange("conf")}
+              onClick={(e) => {
+                e.preventDefault();
+                handleLoanTypeChange("conf");
+              }}
             >
               Conforming
             </button>
@@ -249,7 +245,10 @@ const RateChecker = () => {
               className={`loan-term-btn ${
                 formData.loan_type === "fha" ? "active" : "active-disabled"
               }`}
-              onClick={() => handleLoanTypeChange("fha")}
+              onClick={(e) => {
+                e.preventDefault();
+                handleLoanTypeChange("fha");
+              }}
             >
               FHA
             </button>
@@ -257,28 +256,14 @@ const RateChecker = () => {
               className={`loan-term-btn ${
                 formData.loan_type === "va" ? "active" : "active-disabled"
               }`}
-              onClick={() => handleLoanTypeChange("va")}
+              onClick={(e) => {
+                e.preventDefault();
+                handleLoanTypeChange("va");
+              }}
             >
               VA
             </button>
           </div>
-        </div>
-        <div className="div-rate-input">
-          <label>ARM Type (if applicable):</label>
-          <select
-            name="arm_type"
-            value={formData.arm_type}
-            onChange={handleChange}
-          >
-            <option value="5-1">5/1 ARM</option>
-            <option value="7-1">7/1 ARM</option>
-            <option value="10-1">10/1 ARM</option>
-          </select>
-          <Link to="tick-container" smooth={true} duration={1000}>
-            <button className="rate-btn" type="submit">
-              Check Rates
-            </button>
-          </Link>
         </div>
       </motion.form>
 
