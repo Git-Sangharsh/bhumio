@@ -1,10 +1,12 @@
 import React from "react";
 import RateChecker from "./components/RateChecker";
-import './App.css';
+import "./App.css";
 const App = () => {
   return (
-    <div>
-      <RateChecker />
+    <div className="app">
+      <div className="app-wrapper">
+        <RateChecker />
+      </div>
     </div>
   );
 };

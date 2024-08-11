@@ -162,11 +162,11 @@ const RateChecker = () => {
           />
         </div>
         <div className="div-rate-input">
-          <label>fake structure</label>
+          <label>Rate Type</label>
           <div className="loan-term-div">
             <button
               className={`loan-term-btn ${
-                rateStructure === "fixed" ? "active" : ""
+                rateStructure === "fixed" ? "active" : "active-disabled"
               }`}
               onClick={(e) => {
                 e.preventDefault();
@@ -177,7 +177,7 @@ const RateChecker = () => {
             </button>
             <button
               className={`loan-term-btn ${
-                rateStructure === "arm" ? "active" : ""
+                rateStructure === "arm" ? "active" : "active-disabled"
               }`}
               onClick={(e) => {
                 e.preventDefault();
@@ -192,7 +192,7 @@ const RateChecker = () => {
           <label>Loan Term (years):</label>
           <div className="loan-term-div">
             <button
-              className={`loan-term-btn ${loanTerm === 30 ? "active" : ""}`}
+              className={`loan-term-btn ${loanTerm === 30 ? "active" : "active-disabled"}`}
               onClick={(e) => {
                 e.preventDefault();
                 handleTermChange(30);
@@ -201,7 +201,7 @@ const RateChecker = () => {
               30 Years
             </button>
             <button
-              className={`loan-term-btn ${loanTerm === 15 ? "active" : ""}`}
+              className={`loan-term-btn ${loanTerm === 15 ? "active" : "active-disabled"}`}
               onClick={(e) => {
                 e.preventDefault();
                 handleTermChange(15);
@@ -217,7 +217,7 @@ const RateChecker = () => {
           <div className="loan-term-div">
             <button
               className={`loan-term-btn ${
-                formData.loan_type === "conf" ? "active" : ""
+                formData.loan_type === "conf" ? "active" : "active-disabled"
               }`}
               onClick={() => handleLoanTypeChange("conf")}
             >
@@ -225,7 +225,7 @@ const RateChecker = () => {
             </button>
             <button
               className={`loan-term-btn ${
-                formData.loan_type === "fha" ? "active" : ""
+                formData.loan_type === "fha" ? "active" : "active-disabled"
               }`}
               onClick={() => handleLoanTypeChange("fha")}
             >
@@ -233,7 +233,7 @@ const RateChecker = () => {
             </button>
             <button
               className={`loan-term-btn ${
-                formData.loan_type === "va" ? "active" : ""
+                formData.loan_type === "va" ? "active" : "active-disabled"
               }`}
               onClick={() => handleLoanTypeChange("va")}
             >
